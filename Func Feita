@@ -1,0 +1,49 @@
+    public static void editarFuncionario(){
+        long response = utils.lerLong("Insira o cpf do funcionario que você deseja editar: ");
+        int foundCpf = 0;
+        int index = 0;
+        for (Funcionario funcionario : funcionarios) {
+            index++;
+            if(funcionario.getCpf() == response){
+                foundCpf = index;
+            }
+        }
+        if(foundCpf != 0){
+            int loop = 1;
+            while(loop == 1){
+                Integer ordem = utils.lerInt("MENU DE EDIÇÃO\n1- Nome\n2- Idade\n3- Salario\n4- Email\nSelecione a opção que você deseja editar: ");
+                switch (ordem) {
+                    case 1:
+                        utils.clearScreen();
+                        String nome = utils.lerString("Insira um novo Nome para esse funcionario: ");
+                        funcionarios.get(foundCpf).editarNome(nome);
+                        break;
+                    case 2:
+                        Integer idade = utils.lerInt("Insira uma nova Idade para esse funcionario: ");
+                        funcionarios.get(foundCpf).editarIdade(idade);
+                        break;
+                    case 3:
+                        Float salario = utils.lerFloat("Insira o novo salario desse funcionario: ");
+                        funcionarios.get(foundCpf).editarSalario(salario);;
+                        break;
+                    case 4:
+                        String email = utils.lerString("Insira um novo Email para esse funcionario: ");
+                        funcionarios.get(foundCpf).editarEmail(email);
+                        break;
+                    default:
+                       
+                        break;
+                }
+
+                String lResponse = utils.lerString("Você deseja editar esse funcionario novamente ? (Y/N): ");
+                if(!lResponse.toLowerCase().equals("y")){
+                    loop = 0;   
+                }
+                utils.clearScreen();
+
+            }
+
+        }else{
+            utils.nl("Cpf não encontrado, tente novamente !");
+        }
+    }
